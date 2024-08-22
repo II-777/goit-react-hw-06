@@ -1,0 +1,41 @@
+.form {
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  margin-bottom: 10px;
+  max-width: 558.4px;
+  min-width: 300px;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+.field {
+  width: 100%; 
+  padding: 8px; 
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.btn {
+  display: flex;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100px;
+  padding: 12px;
+  margin: 0 auto;
+}
+
+.btn:hover {
+  background-color: #f0f0f0;
+}

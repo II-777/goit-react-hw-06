@@ -1,0 +1,17 @@
+.container {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 300px;
+  overflow: hidden; 
+}
+
+.icon {
+  margin-right: 10px;
+}
+
+h1 {
+  min-width: 300px;
+  overflow: hidden; 
+}
