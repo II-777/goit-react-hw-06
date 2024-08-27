@@ -1,0 +1,22 @@
+.stats {
+  padding: 10px;
+}
+
+.statsList {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+  padding: 0;
+  margin: 0;
+}
+
+.statsItem {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 16px;
+}
+
+.statsIcon {
+  margin-right: 10px;
+}

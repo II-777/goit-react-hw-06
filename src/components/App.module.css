@@ -2,7 +2,7 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 8px;
   min-width: 300px;
   overflow: hidden; 
 }

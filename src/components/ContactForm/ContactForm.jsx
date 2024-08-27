@@ -1,9 +1,11 @@
+import { useDispatch } from 'react-redux';
+import { nanoid } from 'nanoid';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { nanoid } from "nanoid";
 import * as Yup from 'yup';
-import { useState } from 'react';
+import { addContact } from '../../redux/contactsSlice';
 import css from './ContactForm.module.css';
 
+// Validation schema for the form
 const validationSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too Short!")
@@ -17,19 +19,21 @@ const validationSchema = Yup.object().shape({
     .matches(/^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/, "Invalid phone format"),
 });
 
-export default function ContactForm({ onAdd }) {
-  const [isNameFocused, setIsNameFocused] = useState(false);
-  const [isNumberFocused, setIsNumberFocused] = useState(false);
+// ContactForm Component
+export default function ContactForm() {
+  const dispatch = useDispatch();
 
+  // Handle form submission
   const handleSubmit = (values, { resetForm }) => {
-    onAdd({
+    dispatch(addContact({
       id: nanoid(),
       name: values.name,
       number: values.number,
-    });
+    }));
     resetForm();
   };
 
+  // Initial values for the form
   const initialValues = {
     name: "",
     number: "",
@@ -42,35 +46,37 @@ export default function ContactForm({ onAdd }) {
       onSubmit={handleSubmit}
     >
       <Form className={css.form}>
+        {/* Name Field */}
         <label htmlFor="name">Name</label>
         <Field
+          id="name"
+          name="name"
           className={css.field}
           type="text"
-          name="name"
-          onFocus={() => setIsNameFocused(true)}
-          onBlur={() => setIsNameFocused(false)}
+          placeholder="John Doe"
+          autoComplete="name"
         />
         <ErrorMessage name="name" component="div" className={css.error} />
-        {isNameFocused && ( // Show message only when focused
-          <div style={{ fontSize: '12px', color: 'gray', marginTop: '5px', marginBottom: '5px' }}>
-            Name may include letters, apostrophes, dashes, and spaces, and must be 3 to 50 characters long. For example: Adrian, Jacob Mercer.
-          </div>
-        )}
+        <div style={{ fontSize: '12px', color: 'gray', marginTop: '5px', marginBottom: '5px' }}>
+          Name may include letters, apostrophes, dashes, and spaces, and must be 3 to 50 characters long. For example: Adrian, Jacob Mercer.
+        </div>
+        
+        {/* Number Field */}
         <label htmlFor="number">Number</label>
         <Field
+          id="number"
+          name="number"
           className={css.field}
           type="text"
-          name="number"
-          onFocus={() => setIsNumberFocused(true)}
-          onBlur={() => setIsNumberFocused(false)}
+          placeholder="+123-333-4444"
+          autoComplete="tel"
         />
         <ErrorMessage name="number" component="div" className={css.error} />
-        {isNumberFocused && ( // Show message only when focused
-          <div style={{ fontSize: '12px', color: 'gray', marginTop: '5px', marginBottom: '10px' }}>
-            Phone numbers may contain up to 10 digits only. For example: +123-333-1234 or 123-22-22.
-          </div>
-        )}
+        <div style={{ fontSize: '12px', color: 'gray', marginTop: '5px', marginBottom: '10px' }}>
+          Phone numbers may contain up to 10 digits only. For example: +123-333-1234 or 123-22-22.
+        </div>
 
+        {/* Submit Button */}
         <button className={css.btn} type="submit">Add contact</button>
       </Form>
     </Formik>
